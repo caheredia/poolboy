@@ -3,6 +3,7 @@ use serde_derive::Deserialize;
 use std::env;
 use std::fs::File;
 use std::io::Read;
+use tracing::debug;
 
 #[derive(Debug, Deserialize)]
 struct Stratum {
@@ -19,23 +20,20 @@ async fn read_stratum() -> Stratum {
     // read file
     let file_path =
         env::current_dir().unwrap().to_str().unwrap().to_owned() + "/" + "src/stratum.json";
-    let mut file = match File::open(&file_path) {
-        Ok(f) => f,
-        Err(e) => panic!("no such file {} exception:{}", file_path, e),
-    };
 
+    debug!("Reading stratum file {}", file_path);
     let mut stratum_str = String::new();
-    match file.read_to_string(&mut stratum_str) {
-        Ok(_) => {}
-        Err(e) => panic!("error reading file {} exception:{}", file_path, e),
-    };
+    File::open(&file_path)
+        .unwrap()
+        .read_to_string(&mut stratum_str)
+        .unwrap();
 
-    let stratum: Stratum = serde_json::from_str(&stratum_str).unwrap();
-    stratum
+    serde_json::from_str(&stratum_str).unwrap()
 }
-// read html string from a file
-pub async fn table() -> Html<String> {
-    let page_title = "Local Monero P2Pool metrics";
+
+/// Populates HTML table with stratum JSON
+pub async fn get_stratum_table() -> Html<String> {
+    let page_title = "Local Monero P2Pool stratum";
     let stratum = read_stratum().await;
     let hashrate_15m = stratum.hashrate_15m / 1000.0;
     let hashrate_1h = stratum.hashrate_1h / 1000.0;

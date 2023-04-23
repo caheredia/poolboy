@@ -8,14 +8,14 @@ use tracing::{info, Level};
 use tracing_subscriber::FmtSubscriber;
 
 mod html_utils;
-use html_utils::table;
+use html_utils::get_stratum_table;
 #[tokio::main]
 async fn main() {
     // a builder for `FmtSubscriber`.
     let subscriber = FmtSubscriber::builder()
         // all spans/events with a level higher than TRACE (e.g, debug, info, warn, etc.)
         // will be written to stdout.
-        .with_max_level(Level::INFO)
+        .with_max_level(Level::DEBUG)
         // completes the builder.
         .finish();
     tracing::subscriber::set_global_default(subscriber).expect("setting default subscriber failed");
@@ -24,7 +24,7 @@ async fn main() {
     let app = Router::new()
         .route("/", get(handler))
         .route("/metrics", get(json))
-        .route("/table", get(table));
+        .route("/table", get(get_stratum_table));
 
     // run it with hyper on localhost:3000
     let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
