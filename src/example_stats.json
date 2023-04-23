@@ -1,0 +1,12 @@
+{
+	"hashrate_15m":12098,
+	"hashrate_1h":11281,
+	"hashrate_24h":11281,
+	"total_hashes":15161932,
+	"shares_found":0,
+	"shares_failed":0,
+	"average_effort":100.001,
+	"current_effort":1.299,
+	"connections":1,
+	"incoming_connections":1
+}

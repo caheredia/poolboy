@@ -3,13 +3,12 @@ use axum::{extract::Query, response::Html, routing::get, Router};
 use rand::{thread_rng, Rng};
 use serde_derive::Deserialize;
 use serde_json::{json, Value};
-use std::env;
-use std::fs::File;
-use std::io::Read;
 use std::net::SocketAddr;
 use tracing::{info, Level};
 use tracing_subscriber::FmtSubscriber;
 
+mod html_utils;
+use html_utils::table;
 #[tokio::main]
 async fn main() {
     // a builder for `FmtSubscriber`.
@@ -60,20 +59,4 @@ async fn handler(Query(range): Query<RangeParameters>) -> Html<String> {
     info!("Random number: {}", random_number);
     // Send response in html format.
     Html(format!("<h1>Random Number: {}</h1>", random_number))
-}
-
-// read html string from a file
-async fn table() -> Html<String> {
-    // read file
-    let file_path =
-        env::current_dir().unwrap().to_str().unwrap().to_owned() + "/" + "src/table.html";
-
-    // convert html to string
-    let mut html_str = String::new();
-
-    File::open(file_path)
-        .unwrap()
-        .read_to_string(&mut html_str)
-        .unwrap();
-    Html(html_str)
 }
