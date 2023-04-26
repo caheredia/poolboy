@@ -8,7 +8,7 @@ use utils::get_stratum_table;
 
 mod utils;
 
-/// Simple program to greet a person
+/// Simple program to display the stratum table
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 struct Args {
@@ -37,7 +37,7 @@ async fn main() {
         .layer(Extension(args.data_dir));
 
     // run it with hyper on localhost:3000
-    let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
+    let addr = SocketAddr::from(([0, 0, 0, 0], 3000));
     info!("Listening on {}", addr);
     axum::Server::bind(&addr)
         .serve(app.into_make_service())
