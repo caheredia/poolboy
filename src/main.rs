@@ -1,12 +1,27 @@
-use axum::{routing::get, Router};
+use axum::{routing::get, Extension, Router};
+use clap::Parser;
 use std::net::SocketAddr;
+use std::path::PathBuf;
 use tracing::{info, Level};
 use tracing_subscriber::FmtSubscriber;
-mod html_utils;
-use html_utils::get_stratum_table;
+use utils::get_stratum_table;
+
+mod utils;
+
+/// Simple program to greet a person
+#[derive(Parser, Debug)]
+#[command(author, version, about, long_about = None)]
+struct Args {
+    /// Data directory containing P2pool data
+    #[arg(short, long, value_name = "DIR")]
+    data_dir: PathBuf,
+}
 
 #[tokio::main]
 async fn main() {
+    let args = Args::parse();
+    info!("Reading from directory: {}", args.data_dir.display());
+
     // a builder for `FmtSubscriber`.
     let subscriber = FmtSubscriber::builder()
         // all spans/events with a level higher than TRACE (e.g, debug, info, warn, etc.)
@@ -18,8 +33,8 @@ async fn main() {
 
     // build app with routes
     let app = Router::new()
-        .route("/", get(plain_text))
-        .route("/table", get(get_stratum_table));
+        .route("/", get(get_stratum_table))
+        .layer(Extension(args.data_dir));
 
     // run it with hyper on localhost:3000
     let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
@@ -28,9 +43,4 @@ async fn main() {
         .serve(app.into_make_service())
         .await
         .unwrap();
-}
-
-// `&'static str` becomes a `200 OK` with `content-type: text/plain; charset=utf-8`
-async fn plain_text() -> &'static str {
-    "See statrum table in browser!"
 }

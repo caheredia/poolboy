@@ -1,11 +1,12 @@
 use axum::response::Html;
+use axum::Extension;
 use chrono::{DateTime, Utc};
 use serde_derive::Deserialize;
 use serde_with::serde_as;
 use serde_with::TimestampSeconds;
-use std::env;
 use std::fs::File;
 use std::io::Read;
+use std::path::PathBuf;
 use std::time::SystemTime;
 use tracing::debug;
 
@@ -28,11 +29,11 @@ struct NetworkStats {
 }
 
 //read file and return String
-async fn get_file_str(file_path: &str) -> String {
+async fn get_file_str(file_path: PathBuf) -> String {
+    debug!("Reading file {}", file_path.display());
     let mut file = File::open(file_path).unwrap();
     let mut contents = String::new();
     file.read_to_string(&mut contents).unwrap();
-    debug!("Reading file {}", file_path);
     contents
 }
 
@@ -55,12 +56,11 @@ async fn convert_to_network_timestamp(network_str: String) -> String {
 }
 
 /// Populates HTML table with stratum JSON
-pub async fn get_stratum_table() -> Html<String> {
+pub async fn get_stratum_table(Extension(data_dir): Extension<PathBuf>) -> Html<String> {
     let page_title = "Local Monero P2Pool stratum";
 
-    let stratum_path =
-        env::current_dir().unwrap().to_str().unwrap().to_owned() + "/" + "src/stratum.json";
-    let stratum_str = get_file_str(&stratum_path).await;
+    let stratum_path = data_dir.join("local").join("stratum");
+    let stratum_str = get_file_str(stratum_path).await;
     let stratum = get_stratum(stratum_str).await;
     let hashrate_15m = stratum.hashrate_15m / 1000.0;
     let hashrate_1h = stratum.hashrate_1h / 1000.0;
@@ -71,9 +71,8 @@ pub async fn get_stratum_table() -> Html<String> {
     let incoming_connections = stratum.incoming_connections;
 
     // read network file
-    let network_path =
-        env::current_dir().unwrap().to_str().unwrap().to_owned() + "/" + "src/network.json";
-    let network_str = get_file_str(&network_path).await;
+    let network_path = data_dir.join("network").join("stats");
+    let network_str = get_file_str(network_path).await;
     let timestamp = convert_to_network_timestamp(network_str).await;
 
     let html_table = format!(
