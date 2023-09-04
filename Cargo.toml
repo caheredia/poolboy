@@ -1,7 +1,14 @@
 [package]
 name = "poolboy"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
+authors = ["Cristian <poolboy@simplelogin.dedyn.io>"]
+description = "A tiny web server for Monero P2Pool stats"
+license = "MIT"
+homepage = "https://github.com/caheredia/poolboy"
+repository = "https://github.com/caheredia/poolboy"
+keywords = ["monero", "server", "p2pool"]
+readme = "README.md"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
