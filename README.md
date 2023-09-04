@@ -1,11 +1,11 @@
 # poolboy
-**Testing** ![CI tests](https://github.com/caheredia/poolboy/actions/workflows/rust.yml/badge.svg)
+![CI tests](https://github.com/caheredia/poolboy/actions/workflows/rust.yml/badge.svg)
 
 A convenient way to display, in your browser, stats from your local [Monero P2Pool](https://github.com/SChernykh/p2pool/tree/master), a decentralized pool for Monero mining.
 
 `poolboy` is a tiny (~ 200 lines of code) web server that renders a static page with stats from P2Pool [data-api](https://github.com/SChernykh/p2pool/blob/master/docs/COMMAND_LINE.MD). 
 
-![poolboy](Figures/screenshot.png)
+![poolboy](figures/screenshot.png)
 
 ## Installation
 
@@ -31,5 +31,5 @@ Navigate to [http://localhost:3000](http://localhost:3000) or the IP address of 
 
 If you would like to support this project, you're welcome to send XMR to the following address:
 ```
-82gUCMgZkwZdQXTyfZAMkhXvyxkstcxMzhxdSwyvDCRmH4xGCUY7d4zKppGbMyxwsER8DMGuuaRKrbiQJmRE5EwKUde76Xj
+88fBbt2Dgmu3X4FDow1pURUXZSiwT3gkVcpDtPC9vL9T9EKDZfeYqaUVZcKiA961TjK4oGF6sHL46Nn6DzWjayo7AdPoLQv 
 ```
