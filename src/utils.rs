@@ -51,9 +51,8 @@ async fn get_network_timestamp(network_str: String) -> NetworkStats {
 /// Converts timestamp EPOCH String to DateTime String
 async fn convert_to_network_timestamp(network_str: String) -> String {
     let network_stats: NetworkStats = get_network_timestamp(network_str).await;
-    let timestamp =
-        <std::time::SystemTime as Into<DateTime<Utc>>>::into(network_stats.timestamp).to_string();
-    timestamp
+
+    <std::time::SystemTime as Into<DateTime<Utc>>>::into(network_stats.timestamp).to_string()
 }
 
 /// Populates HTML table with stratum JSON
