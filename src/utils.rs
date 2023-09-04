@@ -28,7 +28,7 @@ struct NetworkStats {
     timestamp: SystemTime,
 }
 
-//read file and return String
+///read file and return String
 async fn get_file_str(file_path: PathBuf) -> String {
     debug!("Reading file {}", file_path.display());
     let mut file = File::open(file_path).unwrap();
@@ -37,7 +37,7 @@ async fn get_file_str(file_path: PathBuf) -> String {
     contents
 }
 
-/// Reads the stratum file contents and returns Stratum
+/// Reads the stratum file contents and returns Stratum struct
 async fn get_stratum(stratum_str: String) -> Stratum {
     serde_json::from_str(&stratum_str).unwrap()
 }
@@ -48,6 +48,7 @@ async fn get_network_timestamp(network_str: String) -> NetworkStats {
     network_stats
 }
 
+/// Converts timestamp EPOCH String to DateTime String
 async fn convert_to_network_timestamp(network_str: String) -> String {
     let network_stats: NetworkStats = get_network_timestamp(network_str).await;
     let timestamp =
