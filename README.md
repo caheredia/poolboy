@@ -5,7 +5,7 @@ A convenient way to display, in your browser, stats from your local [Monero P2Po
 
 `poolboy` is a tiny (~ 200 lines of code) web server that renders a static page with stats from P2Pool [data-api](https://github.com/SChernykh/p2pool/blob/master/docs/COMMAND_LINE.MD). 
 
-![poolboy](Figures/screenshot.png)
+![poolboy](figures/screenshot.png)
 
 ## Installation
 
