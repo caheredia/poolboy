@@ -12,7 +12,7 @@ mod utils;
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 struct Args {
-    /// Data directory containing P2pool data
+    /// Data directory containing P2Pool data
     #[arg(short, long, value_name = "DIR")]
     data_dir: PathBuf,
 }

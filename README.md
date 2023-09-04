@@ -14,18 +14,31 @@ cargo install --git https://github.com/caheredia/poolboy
 ```
 
 ## Run the server
-### Execute with crontab on server running P2Pool and poolboy
+Execute with crontab on server running P2Pool and poolboy
 ```
 @reboot $HOME/.cargo/bin/poolboy --data-dir /path/to/p2pool-data-api-dir
 ```
 or 
-### in a terminal 
+in a terminal 
 ```console
 poolboy --data-dir /path/to/p2pool-data-api-dir
 ```
 
 ## Connecting to the server
 Navigate to [http://localhost:3000](http://localhost:3000) or the IP address of your server, e.g., [http://192.168.10.182:3000](http://192.168.10.182:3000).
+
+## Options
+```console
+❯ poolboy --help
+A tiny web server for Monero P2Pool stats
+
+Usage: poolboy --data-dir <DIR>
+
+Options:
+  -d, --data-dir <DIR>  Data directory containing P2Pool data
+  -h, --help            Print help
+  -V, --version         Print version
+```
 
 ## Donations
 
