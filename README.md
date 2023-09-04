@@ -1,5 +1,5 @@
 # poolboy
-**Testing** ![CI tests](https://github.com/caheredia/poolboy/actions/workflows/rust.yml/badge.svg)
+![CI tests](https://github.com/caheredia/poolboy/actions/workflows/rust.yml/badge.svg)
 
 A convenient way to display, in your browser, stats from your local [Monero P2Pool](https://github.com/SChernykh/p2pool/tree/master), a decentralized pool for Monero mining.
 
