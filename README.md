@@ -31,5 +31,5 @@ Navigate to [http://localhost:3000](http://localhost:3000) or the IP address of 
 
 If you would like to support this project, you're welcome to send XMR to the following address:
 ```
-82gUCMgZkwZdQXTyfZAMkhXvyxkstcxMzhxdSwyvDCRmH4xGCUY7d4zKppGbMyxwsER8DMGuuaRKrbiQJmRE5EwKUde76Xj
+88fBbt2Dgmu3X4FDow1pURUXZSiwT3gkVcpDtPC9vL9T9EKDZfeYqaUVZcKiA961TjK4oGF6sHL46Nn6DzWjayo7AdPoLQv 
 ```
